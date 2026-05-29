@@ -206,8 +206,26 @@ ardió como el día y volvió al silencio.`}
 							<span className="sn-chip">borrador</span>
 						</div>
 
+						{/* Comparativa dos columnas */}
+						<h2 id="s4">Sans vs. serif · mismo texto</h2>
+						<p style={{ marginBottom: "var(--sn-baseline)" }}>
+							<small>El mismo párrafo en los dos registros del trío. La columna izquierda usa la sans (cuerpo e interfaz); la derecha usa la serif (voz editorial). Útil para comparar el color tipográfico y el ritmo de línea base entre familias.</small>
+						</p>
+						<div className="sn-twocol">
+							<div className="sn-twocol-col sn-twocol-sans">
+								<div className="col-label">Sans · {active.sansName}</div>
+								<p>El 11 de noviembre de 1572, Tycho Brahe observó una estrella nueva en la constelación de Casiopea. La llamó <em>stella nova</em> y documentó sus mediciones en un tratado que dio al mundo la palabra «nova».</p>
+								<p>Su mayor consecuencia no fue astronómica sino filosófica: demostró que los cielos —que la tradición aristotélica creía perfectos e inmutables— <strong>cambian</strong>. Fue una de las grietas por donde entró la revolución científica.</p>
+							</div>
+							<div className="sn-twocol-col sn-twocol-serif">
+								<div className="col-label">Serif · {active.serifName}</div>
+								<p>El 11 de noviembre de 1572, Tycho Brahe observó una estrella nueva en la constelación de Casiopea. La llamó <em>stella nova</em> y documentó sus mediciones en un tratado que dio al mundo la palabra «nova».</p>
+								<p>Su mayor consecuencia no fue astronómica sino filosófica: demostró que los cielos —que la tradición aristotélica creía perfectos e inmutables— <strong>cambian</strong>. Fue una de las grietas por donde entró la revolución científica.</p>
+							</div>
+						</div>
+
 						{/* Muestrario tipográfico explícito */}
-						<h2 id="s4">El trío en detalle · <span style={{ color: "var(--sn-nova)" }}>{active.name}</span></h2>
+						<h2 id="s5">Trío completo · <span style={{ color: "var(--sn-nova)" }}>{active.name}</span></h2>
 						<p style={{ marginBottom: "var(--sn-baseline)" }}>
 							<small>{active.tag} — serif <strong>{active.serifName}</strong> · sans <strong>{active.sansName}</strong> · mono <strong>{active.monoName}</strong>. {active.desc}</small>
 						</p>
@@ -245,7 +263,8 @@ ardió como el día y volvió al silencio.`}
 							<li><a href="#s1">Observación y registro</a></li>
 							<li><a href="#s2">Notas editoriales</a></li>
 							<li><a href="#s3">Para quien edita</a></li>
-							<li><a href="#s4">El trío en detalle</a></li>
+							<li><a href="#s4">Sans vs. serif</a></li>
+							<li><a href="#s5">El trío en detalle</a></li>
 						</ol>
 					</nav>
 				</aside>

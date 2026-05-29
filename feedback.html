@@ -145,6 +145,21 @@ header {
   margin: var(--sn-s-3) 0; padding-left: var(--sn-s-4);
   border-left: 3px solid var(--sn-nova); color: var(--sn-ink);
 }
+.sample blockquote cite {
+  display: block; font-style: normal;
+  font-family: var(--sn-font-text, system-ui, sans-serif);
+  font-size: var(--sn-fs-sm); color: var(--sn-ink-soft); margin-top: var(--sn-s-2);
+}
+.sample .sn-poem {
+  font-family: var(--sn-font-serif, Georgia, serif);
+  font-size: var(--sn-fs-md); line-height: var(--sn-leading);
+  margin: var(--sn-s-3) 0; white-space: pre-line;
+  color: var(--sn-ink);
+}
+.sample .sn-poem .sn-poem-title {
+  font-style: italic; color: var(--sn-ink-soft);
+  display: block; margin-bottom: var(--sn-s-2);
+}
 .sample code {
   font-family: var(--sn-font-mono, monospace); font-size: .88em;
   background: var(--sn-sunk); padding: .12em .4em;
@@ -177,6 +192,7 @@ header {
   background: var(--sn-btn-bg); color: var(--sn-btn-fg);
   transition: background var(--sn-dur-1), border-color var(--sn-dur-1);
 }
+.vote-btn svg { width: 1rem; height: 1rem; flex: none; }
 .vote-btn:hover { background: var(--sn-btn-bg-hover); border-color: var(--sn-btn-border-hover); }
 .vote-btn.is-voted {
   background: var(--sn-nova); color: var(--sn-nova-ink);
@@ -362,11 +378,15 @@ const GITHUB_ISSUE_BASE = "https://github.com/hspencer/stella-nova/issues/new?ti
 const SAMPLE_HTML = (t) => `
 <p class="meta">${t.tag}</p>
 <h1>De nova stella<span class="dot">.</span></h1>
-<p>El <strong>11 de noviembre de 1572</strong>, Tycho Brahe observó una estrella nueva en la constelación de <em>Casiopea</em>. La llamó <em>stella nova</em>. Aquello no era una estrella naciendo sino muriendo.</p>
-<h2>Observación</h2>
-<p>Llegó a brillar como Venus (magnitud ≈ −4), visible a plena luz del día. Brahe buscó —sin éxito— el <em>paralaje</em> que la situaría entre los planetas. Con esto demostró que los cielos <strong>cambian</strong>.</p>
-<blockquote>Era una estrella genuina, en el lugar donde jamás se había visto estrella alguna.<br><small>— Tycho Brahe, <em>De nova stella</em> (1573)</small></blockquote>
-<p>El sistema usa <code>--sn-baseline</code> como unidad vertical. Todos los márgenes y alturas de línea son múltiplos de esta medida para mantener el ritmo de la grilla.</p>
+<p>El <strong>11 de noviembre de 1572</strong>, Tycho Brahe observó una estrella nueva en la constelación de <em>Casiopea</em>. La llamó <em>stella nova</em>. Aquello no era una estrella naciendo sino muriendo: hoy se la conoce como SN 1572.</p>
+<h2>Observación y registro</h2>
+<p>Llegó a brillar como Venus (magnitud ≈ −4), visible a plena luz del día durante semanas. Brahe buscó —sin éxito— el <em>paralaje</em> que la situaría entre los planetas. Con esto demostró que los cielos <strong>cambian</strong>.</p>
+<blockquote>No tenía la menor duda; no había error de observación. Era una estrella genuina, en el lugar donde jamás se había visto estrella alguna.<cite>— Tycho Brahe, <em>De nova stella</em> (1573)</cite></blockquote>
+<div class="sn-poem"><span class="sn-poem-title">Fragmento</span>Cinco luces trazan la W del norte,
+mano que escribe sobre el cuaderno oscuro;
+una de ellas, dicen, fue nueva una vez,
+ardió como el día y volvió al silencio.</div>
+<p>El sistema usa <code>--sn-baseline</code> como unidad vertical. Todos los márgenes y alturas de línea son múltiplos de esta medida.</p>
 `;
 
 const ISSUE_LABEL = (t) => `${encodeURIComponent(t.n + ' ' + t.name)}&body=${encodeURIComponent('Mi trío preferido es el ' + t.n + ' · ' + t.name + ' (' + t.tag + ').\n\nRazón: ')}`;

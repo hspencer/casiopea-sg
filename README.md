@@ -1,6 +1,6 @@
 # Casiopea: Sistema Gráfico
 
-Sistema de diseño tipográfico para la [Wiki Casiopea](https://wiki.ead.pucv.cl) (e\[ad\] · PUCV), orientado a la skin **[Stella Nova](https://github.com/hspencer/stella-nova)**.
+Exploración para un sistema de diseño tipográfico para la [Wiki Casiopea](https://wiki.ead.pucv.cl) (e\[ad\] · PUCV), orientado a la skin **[Stella Nova](https://github.com/hspencer/stella-nova)**.
 
 **→ [Ver en vivo](https://herbertspencer.net/casiopea-sg/)**
 

@@ -2,7 +2,7 @@
 
 Sistema de diseño tipográfico para la [Wiki Casiopea](https://wiki.ead.pucv.cl) (e\[ad\] · PUCV), orientado a la skin **[Stella Nova](https://github.com/hspencer/stella-nova)**.
 
-**→ [Ver en GitHub Pages](https://hspencer.github.io/casiopea-sg/)**
+**→ [Ver en vivo](https://herbertspencer.net/casiopea-sg/)**
 
 ---
 
@@ -73,7 +73,7 @@ Todos son fuentes OFL, disponibles en Google Fonts y auto-alojables como `.woff2
 
 ## Cómo usar el espécimen
 
-Abre [`specimen/Tipografías Stella Nova.html`](https://hspencer.github.io/casiopea-sg/specimen/Tipografías%20Stella%20Nova.html) en un navegador moderno.
+Abre [`specimen/Tipografías Stella Nova.html`](https://herbertspencer.net/casiopea-sg/specimen/Tipograf%C3%ADas%20Stella%20Nova.html) en un navegador moderno.
 
 - **Tarjetas de trío** → clic en cualquiera para cambiar toda la página al instante
 - **Grilla** (botón en la cabecera) → superpone la retícula en carmín para verificar el ritmo vertical
@@ -84,7 +84,7 @@ Abre [`specimen/Tipografías Stella Nova.html`](https://hspencer.github.io/casio
 
 ## Cómo dar feedback
 
-Visita la página de [**Comparador y feedback**](https://hspencer.github.io/casiopea-sg/feedback.html):
+Visita la página de [**Comparador y feedback**](https://herbertspencer.net/casiopea-sg/feedback.html):
 
 1. Selecciona dos tríos (A vs. B)
 2. Lee el mismo contenido en ambas tipografías

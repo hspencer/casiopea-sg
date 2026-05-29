@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es" data-sn-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Casiopea: Sistema Gráfico</title>
+<meta name="description" content="Sistema de diseño tipográfico para la Wiki Casiopea. Exploración de tríos tipográficos para la skin Stella Nova.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="specimen/tokens.css" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: var(--sn-fs-root); }
+body {
+  margin: 0;
+  font-family: var(--sn-font-text);
+  font-size: var(--sn-fs-base);
+  line-height: var(--sn-leading);
+  color: var(--sn-ink);
+  background: var(--sn-field);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--sn-dur-2) var(--sn-ease), color var(--sn-dur-2) var(--sn-ease);
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: var(--sn-field-grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.shell { max-width: 72rem; margin-inline: auto; padding-inline: var(--sn-s-5); position: relative; z-index: 1; }
+
+nav {
+  display: flex; align-items: center; gap: var(--sn-s-3);
+  padding-block: var(--sn-s-4);
+  border-bottom: var(--sn-hair);
+}
+.nav-brand { display: flex; align-items: center; gap: var(--sn-s-3); color: var(--sn-ink); text-decoration: none; margin-right: auto; }
+.iso { width: 2.4rem; height: 2.4rem; color: var(--sn-nova); flex: none; }
+.iso .sn-i-line { fill: none; stroke: currentColor; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.iso .sn-i-star { fill: currentColor; }
+.wordmark b { font-family: var(--sn-font-serif); font-weight: 600; font-size: var(--sn-fs-lg); letter-spacing: .005em; }
+.wordmark span { font-size: var(--sn-fs-xs); color: var(--sn-ink-soft); letter-spacing: .14em; text-transform: uppercase; display: block; line-height: 1.2; }
+
+.nbtn {
+  height: 2.2rem; padding-inline: var(--sn-s-3);
+  display: inline-flex; align-items: center; gap: var(--sn-s-2);
+  background: transparent; border: 1px solid transparent; border-radius: var(--sn-radius);
+  color: var(--sn-icon); font: inherit; font-size: var(--sn-fs-sm); cursor: pointer;
+  text-decoration: none;
+  transition: background var(--sn-dur-1), color var(--sn-dur-1);
+}
+.nbtn:hover { background: var(--sn-opt-hover-bg); color: var(--sn-icon-active); }
+.nbtn svg { width: 1rem; height: 1rem; }
+
+/* Hero */
+.hero {
+  padding-block: var(--sn-s-8) var(--sn-s-7);
+  text-align: center;
+}
+.hero h1 {
+  font-family: var(--sn-font-serif); font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.1;
+  margin: 0 0 var(--sn-s-4); letter-spacing: -.02em;
+}
+.hero h1 .nova { color: var(--sn-nova); }
+.hero p { font-size: var(--sn-fs-md); color: var(--sn-ink-soft); max-width: 44rem; margin: 0 auto var(--sn-s-6); line-height: 1.6; }
+
+.cta-row { display: flex; gap: var(--sn-s-3); justify-content: center; flex-wrap: wrap; }
+.cta {
+  height: 2.8rem; padding-inline: var(--sn-s-5);
+  display: inline-flex; align-items: center; gap: var(--sn-s-2);
+  font: inherit; font-size: var(--sn-fs-sm); font-weight: 500; cursor: pointer;
+  border-radius: var(--sn-radius); text-decoration: none;
+  transition: background var(--sn-dur-1), border-color var(--sn-dur-1);
+}
+.cta.primary { background: var(--sn-ink); color: var(--sn-paper); border: 1px solid var(--sn-ink); }
+.cta.primary:hover { background: color-mix(in oklab, var(--sn-ink) 86%, var(--sn-paper)); }
+.cta.secondary { background: var(--sn-sunk); color: var(--sn-ink); border: 1px solid var(--sn-hairline); }
+.cta.secondary:hover { background: var(--sn-paper); border-color: var(--sn-ink-faint); }
+.cta svg { width: 1rem; height: 1rem; }
+
+/* Tarjetas */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--sn-s-4);
+  padding-block: 0 var(--sn-s-7);
+}
+.card {
+  background: var(--sn-paper);
+  border: 1px solid var(--sn-paper-edge);
+  border-radius: var(--sn-radius-l);
+  box-shadow: var(--sn-lift-paper);
+  padding: var(--sn-s-5);
+  text-decoration: none; color: inherit;
+  transition: border-color var(--sn-dur-1), transform var(--sn-dur-1), box-shadow var(--sn-dur-1);
+  display: flex; flex-direction: column; gap: var(--sn-s-3);
+}
+.card:hover { border-color: var(--sn-ink-faint); transform: translateY(-3px); box-shadow: var(--sn-lift); }
+.card-icon { width: 2.4rem; height: 2.4rem; color: var(--sn-nova); }
+.card h2 { font-size: var(--sn-fs-md); font-weight: 600; margin: 0; }
+.card p { font-size: var(--sn-fs-sm); color: var(--sn-ink-soft); margin: 0; line-height: 1.55; flex: 1; }
+.card-link { font-size: var(--sn-fs-sm); font-weight: 500; color: var(--sn-link); }
+
+/* Sección de tríos */
+.trios-preview {
+  background: var(--sn-paper);
+  border: 1px solid var(--sn-paper-edge);
+  border-radius: var(--sn-radius-l);
+  box-shadow: var(--sn-lift-paper);
+  padding: var(--sn-s-5);
+  margin-block: 0 var(--sn-s-7);
+}
+.trios-preview h2 { font-size: var(--sn-fs-md); font-weight: 600; margin: 0 0 var(--sn-s-4); }
+.trio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--sn-s-3); }
+.trio-mini {
+  padding: var(--sn-s-3); background: var(--sn-sunk);
+  border-radius: var(--sn-radius); border: 1px solid var(--sn-hairline);
+  font-size: var(--sn-fs-xs); color: var(--sn-ink-faint);
+}
+.trio-mini .tn { font-weight: 600; letter-spacing: .08em; }
+.trio-mini .tw { font-size: 1.4rem; line-height: 1.1; color: var(--sn-ink); margin: .15rem 0 .1rem; }
+.trio-mini .tt { font-size: var(--sn-fs-xs); }
+
+footer {
+  border-top: var(--sn-hair);
+  padding-block: var(--sn-s-5) var(--sn-s-7);
+  font-size: var(--sn-fs-sm); color: var(--sn-ink-faint);
+  display: flex; gap: var(--sn-s-4); align-items: center; flex-wrap: wrap;
+}
+footer a { color: var(--sn-link); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--sn-link) 35%, transparent); }
+footer a:hover { color: var(--sn-link-hover); }
+footer .spacer { flex: 1; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav>
+    <a class="nav-brand" href="index.html">
+      <svg class="iso" viewBox="0 0 148 148" aria-hidden="true">
+        <g transform="matrix(0.892,0,0,0.892,7.41,23.33)">
+          <g transform="matrix(1.1172,0,0,1.1172,-8.92,-3.72)">
+            <path class="sn-i-line" d="M 22.676 21.837 L 45.501 59.142 L 77.973 52.747 C 77.973 52.747 98.206 93.357 97.975 93.357 C 97.744 93.357 130.013 63.639 130.013 63.639"></path>
+            <circle class="sn-i-star" cx="22.613" cy="21.911" r="6"></circle>
+            <circle class="sn-i-star" cx="45.826" cy="57.671" r="6"></circle>
+            <circle class="sn-i-star" cx="77.438" cy="52.751" r="6"></circle>
+            <circle class="sn-i-star" cx="97.134" cy="92.888" r="6"></circle>
+            <circle class="sn-i-star" cx="129.396" cy="63.714" r="6"></circle>
+          </g>
+        </g>
+      </svg>
+      <span class="wordmark"><b>Casiopea</b><span>Sistema Gráfico</span></span>
+    </a>
+    <a class="nbtn" href="https://github.com/hspencer/stella-nova" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      stella-nova
+    </a>
+    <button class="nbtn" id="btn-dark" onclick="toggleDark()">
+      <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg id="icon-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+    </button>
+  </nav>
+
+  <section class="hero">
+    <h1>Sistema Gráfico<br>Casiopea<span class="nova">.</span></h1>
+    <p>Exploración tipográfica para la skin <strong>Stella Nova</strong> de la Wiki Casiopea (e[ad] · PUCV). Once tríos de fuentes libres — serif, sans y mono — todos respetando la grilla de línea base del sistema.</p>
+    <div class="cta-row">
+      <a class="cta primary" href="specimen/Tipografías Stella Nova.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Ver espécimen
+      </a>
+      <a class="cta secondary" href="feedback.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Dar feedback
+      </a>
+    </div>
+  </section>
+
+  <div class="cards">
+    <a class="card" href="specimen/Tipografías Stella Nova.html">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <h2>Espécimen tipográfico</h2>
+      <p>Página wiki completa con los 11 tríos. Alterna entre ellos en vivo: cuerpo, títulos, citas, código, tablas, controles. Panel de Tweaks para afinar voz serif/sans, grilla y tema.</p>
+      <span class="card-link">Abrir espécimen →</span>
+    </a>
+    <a class="card" href="feedback.html">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <h2>Comparador &amp; feedback</h2>
+      <p>Pon dos tríos cara a cara sobre el mismo contenido. Marca tu preferencia, deja un comentario en GitHub Issues. El resultado ayuda al equipo a decidir.</p>
+      <span class="card-link">Comparar tríos →</span>
+    </a>
+    <a class="card" href="https://github.com/hspencer/stella-nova" target="_blank" rel="noopener">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      <h2>Stella Nova (skin)</h2>
+      <p>Repositorio de la skin MediaWiki que implementará el sistema tipográfico elegido. Tokens de color, grilla de línea base y componentes de interfaz.</p>
+      <span class="card-link">Ver en GitHub →</span>
+    </a>
+  </div>
+
+  <div class="trios-preview">
+    <h2>Los 11 tríos — todos OFL, auto-alojables</h2>
+    <div class="trio-grid" id="trio-grid"></div>
+  </div>
+
+  <footer>
+    <span>Casiopea: Sistema Gráfico — e[ad] · PUCV</span>
+    <span class="spacer"></span>
+    <a href="https://github.com/hspencer/stella-nova" target="_blank" rel="noopener">hspencer/stella-nova</a>
+    <a href="https://github.com/hspencer/casiopea-sg" target="_blank" rel="noopener">hspencer/casiopea-sg</a>
+  </footer>
+</div>
+
+<script>
+const TRIOS = [
+  { id:"plex",      n:"01", name:"Plex",       tag:"Superfamilia única",       serif:"'IBM Plex Serif',Georgia,serif",    sans:"'IBM Plex Sans',system-ui,sans-serif" },
+  { id:"source",    n:"02", name:"Source",      tag:"Humanista sereno",          serif:"'Source Serif 4',Georgia,serif",    sans:"'Source Sans 3',system-ui,sans-serif" },
+  { id:"literata",  n:"03", name:"Literata",    tag:"Editorial-literario",       serif:"'Literata',Georgia,serif",          sans:"'Libre Franklin',system-ui,sans-serif" },
+  { id:"newsreader",n:"04", name:"Newsreader",  tag:"Revista elegante",          serif:"'Newsreader',Georgia,serif",        sans:"'Hanken Grotesk',system-ui,sans-serif" },
+  { id:"spectral",  n:"05", name:"Spectral",    tag:"Pantalla contemporánea",    serif:"'Spectral',Georgia,serif",          sans:"'Work Sans',system-ui,sans-serif" },
+  { id:"space",     n:"06", name:"Space",       tag:"Retro-técnico preciso",     serif:"'Crimson Pro',Georgia,serif",       sans:"'Space Grotesk',system-ui,sans-serif" },
+  { id:"geist",     n:"07", name:"Geist",       tag:"Minimalista neutro",        serif:"'Lora',Georgia,serif",              sans:"'Geist',system-ui,sans-serif" },
+  { id:"sora",      n:"08", name:"Sora",        tag:"Geométrico cálido",         serif:"'Bitter',Georgia,serif",            sans:"'Sora',system-ui,sans-serif" },
+  { id:"barlow",    n:"09", name:"Barlow",      tag:"Semi-condensada económica", serif:"'Source Serif 4',Georgia,serif",    sans:"'Barlow',system-ui,sans-serif" },
+  { id:"archivo",   n:"10", name:"Archivo",     tag:"Grotesca de prensa",        serif:"'Newsreader',Georgia,serif",        sans:"'Archivo',system-ui,sans-serif" },
+  { id:"plexcond",  n:"11", name:"Plex Cond.",  tag:"Superfamilia condensada",   serif:"'IBM Plex Serif',Georgia,serif",    sans:"'IBM Plex Sans Condensed',system-ui,sans-serif" }
+];
+
+const grid = document.getElementById("trio-grid");
+TRIOS.forEach(t => {
+  const el = document.createElement("a");
+  el.className = "trio-mini";
+  el.href = `specimen/Tipografías Stella Nova.html`;
+  el.style.setProperty("--sn-tc-serif", t.serif);
+  el.style.setProperty("--sn-tc-sans", t.sans);
+  el.innerHTML = `<div class="tn">${t.n}</div>
+    <div class="tw" style="font-family:${t.serif}">Casiopea</div>
+    <div class="tt" style="font-family:${t.sans}">${t.name}</div>
+    <div class="tt" style="margin-top:2px;font-size:.68rem">${t.tag}</div>`;
+  grid.appendChild(el);
+});
+
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute("data-sn-theme") === "dark";
+  document.documentElement.setAttribute("data-sn-theme", isDark ? "light" : "dark");
+  document.getElementById("icon-moon").style.display = isDark ? "" : "none";
+  document.getElementById("icon-sun").style.display = isDark ? "none" : "";
+}
+</script>
+</body>
+</html>
